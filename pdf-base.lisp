@@ -304,6 +304,38 @@
 
 (def-pdf-op set-cymk-fill (c y m k) "~5f ~5f ~5f ~5f k~%")
 
+;; this affects both stroking operations ("CA" op) and non-stroking ("ca" op)
+;; alpha ranges from 0 (transparent) to 1 (opaque)
+(defun set-transparency (alpha &optional (blend-mode :normal))
+  (declare (type float alpha))
+  (let* ((a (format nil "~3F" alpha))
+         (bm (ecase blend-mode
+               (:normal "/Normal")
+               (:multiple "/Multiply")
+               (:screen "/Screen")
+               (:overlay "/Overlay")
+               (:darken "/Darken")
+               (:lighten "/Lighten")
+               (:ColorDodge "/ColorDodge")
+               (:ColorBurn "/ColorBurn")
+               (:HardLight "/HardLight")
+               (:SoftLight "/SoftLight")
+               (:difference "/Difference")
+               (:exclusion "/Exclusion")
+               (:saturation "/Saturation")
+               (:color "/Color")
+               (:luminosity "/Luminosity"))))
+    (set-gstate "CA" a "ca" a "BM" bm)))
+
+(defun set-fill-transparency (alpha)
+  (declare (type float alpha))
+  (set-gstate "ca" (format nil "~3F" alpha)))
+
+(defun set-stroke-transparency (alpha)
+  (declare (type float alpha))
+  (set-gstate "CA" (format nil "~3F" alpha)))
+
+
 (defun draw-image (image x y dx dy rotation &optional keep-aspect-ratio)
   (when keep-aspect-ratio
     (let ((r1 (/ dy dx))
