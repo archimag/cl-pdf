@@ -59,7 +59,7 @@
 ;;  *afm-files-directories* (#P"cl-pdf/afm/*.afm") as it contains wildcards!
 (defparameter *afm-files-directories*
   (list #p"/usr/share/fonts/afm/"
-        (merge-pathnames "afm/" (asdf:component-pathname (asdf:find-system :cl-pdf))))
+        (merge-pathnames "afm/" (directory-namestring (asdf:component-pathname (asdf:find-system :cl-pdf)))))
   "The list of directories containing the Adobe Font Metrics and other font files.
  Can be expanded by additionally loaded modules.")
 
