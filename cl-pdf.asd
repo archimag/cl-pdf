@@ -18,6 +18,7 @@
                (:file "encodings"  :depends-on ("defpackage"))
                (:file "t1-font" :depends-on ("font-metrics" "encodings"))
                (:file "ttu-font" :depends-on ("font-metrics"))
+               (:file "ttf" :depends-on ("ttu-font"))
                (:file "font" :depends-on ("t1-font"))
                (:file "pdf" :depends-on ("font"))
                (:file "x11-colors" :depends-on ("defpackage"))
@@ -27,4 +28,4 @@
                (:file "text" :depends-on ("pdf-base"))
                (:file "bar-codes" :depends-on ("pdf-geom"))
                (:file "chart" :depends-on ("text" "pdf-geom")))
-  :depends-on (:iterate :salza2))
+  :depends-on (#:iterate #:salza2 #:zpb-ttf))
