@@ -69,17 +69,6 @@
 #+(or lispworks allegro sbcl)
 (pushnew :pdf-binary *features*)
 
-;(eval-when (:compile-toplevel :load-toplevel :execute)
-#+use-uffi-zlib
-(defvar *zlib-search-paths* `(,(directory-namestring *load-truename*)
-                              #+lispworks
-                              ,(directory-namestring (lw:lisp-image-name))
-                              "/usr/local/lib/"
-                              "/usr/lib/"
-                              "/windows/system32/"
-                              "/winnt/system32/")
-  "The paths where to search the zlib shared library")
-
 ;a catchall for various kind of errors that can happen in the generation of a document.
 ; just catch 'max-number-of-pages-reached if you want to do something with this.
 (defvar *max-number-of-pages* 1000
