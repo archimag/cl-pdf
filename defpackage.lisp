@@ -42,7 +42,7 @@
    #:set-cymk-fill #:paint-image #:draw-image #:get-named-reference #:register-page-reference
    #:add-link #:add-URI-link #:add-external-link #:read-jpeg-file #:make-jpeg-image
    #:make-image #:width #:height
-   #:enter-outline-level #:close-outline-level #:with-outline-level #:append-child-outline
+   #:enter-outline-level #:close-outline-level #:with-outline-level #:append-child-outline #:outline-root
    #:draw-centered-text #:draw-left-text #:draw-right-text
    #:vertical-value-axis #:horizontal-histo-axis #:legend #:histogram #:draw-object
    #:pie-chart #:plot-xy
