@@ -13,7 +13,7 @@
   :long-description "The cl-pdf package provides a stand-alone Common Lisp library to generate PDF files."
   :components ((:file "defpackage")
                (:file "config" :depends-on ("defpackage"))
-               (:file "zlib" :depends-on ("defpackage"))
+               (:file "zlib" :depends-on ("config"))
                (:file "font-metrics"  :depends-on ("config"))
                (:file "encodings"  :depends-on ("defpackage"))
                (:file "t1-font" :depends-on ("font-metrics" "encodings"))
