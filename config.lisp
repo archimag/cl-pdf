@@ -46,19 +46,14 @@
 
 (defvar *compress-fonts* t "nil or decode filter designator")
 
-;the cl-pdf base directory
-(defvar *cl-pdf-base-directory*
-   (make-pathname :name nil :type nil :version nil
-     :defaults #.(or #-gcl *compile-file-truename* *load-truename*))
-   "The base directory for cl-pdf source and auxiliary data")
-
 ;; The *afm-files-directories* is only for the 14 predefined fonts.
 ;; other fonts must have their afm files read only when they are loaded
 ;; Rationale for redefinition:
 ;;  Neither of the versions of search-for-file can search the original value of
 ;;  *afm-files-directories* (#P"cl-pdf/afm/*.afm") as it contains wildcards!
 (defparameter *afm-files-directories*
-  (list (merge-pathnames #P"afm/" *cl-pdf-base-directory*))
+  (list #p"/usr/share/fonts/afm/"
+        (merge-pathnames "afm/" (directory-namestring (asdf:component-pathname (asdf:find-system :cl-pdf)))))
   "The list of directories containing the Adobe Font Metrics and other font files.
  Can be expanded by additionally loaded modules.")
 
