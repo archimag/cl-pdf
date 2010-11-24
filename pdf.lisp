@@ -215,6 +215,15 @@
     (setf (sub-levels parent)(nconc (sub-levels parent)(list outline)))
     (push outline *outlines-stack*)))
 
+(defun append-child-outline (parent title ref-name)
+  (let ((child (make-instance 'outline
+                              :title title
+                              :reference (get-named-reference ref-name))))
+    (setf (sub-levels parent)
+          (nconc (sub-levels parent)
+                 (list child)))
+    child))
+
 (defun close-outline-level ()
   (pop *outlines-stack*))
 
