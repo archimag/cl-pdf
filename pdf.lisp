@@ -234,20 +234,19 @@
                               #-lispworks (lambda (char) (<= (char-code char) 255))
                               string)))
     (with-output-to-string (stream nil :element-type 'base-char)
-      (write-char #\( stream)
-      (when unicode			; write the Unicode byte order marker U+FEFF
-        (write-char #.(code-char 254) stream) (write-char #.(code-char 255) stream))
+      (if unicode
+          (write-string "<FEFF" stream)
+          (write-char #\( stream))
       (loop for char across string
             for code = (char-code char)
             if unicode
-            do (write-char (code-char (ldb (byte 8 8) code)) stream)	; hi
-               (write-char (code-char (ldb (byte 8 0) code)) stream)	; lo
+            do (format stream "~4,'0x" code)
             else if (> code 255)
             do (write-char (code-char (ldb (byte 8 0) code)) stream)	; lo
             else do (case char ((#\( #\) #\\)
                                 (write-char #\\ stream)))
                       (write-char char stream))
-      (write-char #\) stream))))
+      (write-char (if unicode #\> #\)) stream))))
 
 (defmacro with-outline-level ((title ref-name) &body body)
  `(unwind-protect
