@@ -19,7 +19,7 @@
                (:file "t1-font" :depends-on ("font-metrics" "encodings"))
                (:file "ttu-font" :depends-on ("font-metrics"))
                (:file "ttf" :depends-on ("ttu-font"))
-               (:file "font" :depends-on ("t1-font"))
+               (:file "font" :depends-on ("t1-font" "ttu-font"))
                (:file "pdf" :depends-on ("font"))
                (:file "x11-colors" :depends-on ("defpackage"))
                (:file "pdf-base" :depends-on ("pdf" "x11-colors"))
